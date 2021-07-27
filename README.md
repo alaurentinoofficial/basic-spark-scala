@@ -12,8 +12,7 @@
 ### Mac OS
 1. Extract the spark folder spark-3.1.2-bin-hadoop3.2.tgz
 ```sh
-tar -xyz ./spark-3.1.2-bin-hadoop3.2.tgz
-mv spark-3.1.2-bin-hadoop3.2 spark-3.1.2
+tar -xfz ./spark-3.1.2-bin-hadoop3.2.tgz
 ```
 
 3. Create folder ~/spark
@@ -23,14 +22,14 @@ mkdir ~/spark
 
 4. Move the spark folder
 ```sh
-$ mv ./spark-3.1.2 ~/spark/spark-3.1.2
+$ mv ./spark-3.1.2-bin-hadoop3.2 ~/spark/spark-3.1.2
 ```
 
-5. Add export variables in ZSH profile (Replace "<Your User>" to your user in OS)
+5. Add export variables and update the path using ZSH profile (Replace "{Your User}" to your user in OS)
 ```sh
-export JAVA_HOME=$(/usr/libexec/java_home)
-export SPARK_HOME="/Users/<Your User>/spark/spark-3.1.2"
-export PATH="$SPARK_HOME/bin:$PATH"
+$ echo '\nexport JAVA_HOME=$(/usr/libexec/java_home)' >> ~/.zshrc
+$ echo 'export SPARK_HOME="/Users/{Your User}/spark/spark-3.1.2"' >> ~/.zshrc
+$ echo 'export PATH="$SPARK_HOME/bin:$PATH"\n' >> ~/.zshrc
 ```
 
 <br>
