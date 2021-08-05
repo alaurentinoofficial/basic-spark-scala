@@ -36,9 +36,9 @@ $ echo 'export PATH="$SPARK_HOME/bin:$PATH"\n' >> ~/.zshrc
 
 # Environments
 
-### 1. Visual Studio Code
+### Visual Studio Code
 
 [Link to download and Install](https://code.visualstudio.com/)
 
-#### Install the Scala metals extension 
+1. Install the Scala metals extension
 ![](./assets/code-metals.png)
