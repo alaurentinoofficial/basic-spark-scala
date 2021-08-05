@@ -23,8 +23,8 @@ class SampleSparkTest extends SparkTest {
                 StructField("Age-Avg", DoubleType, true)
             ))
 
-            Main.transform(vote_df).schema should be(check_schema)
-            Main.transform(vote_df).sort().collect should be(check_df.sort().collect)
+            Helper.transform(vote_df).schema should be(check_schema)
+            Helper.transform(vote_df).sort().collect should be(check_df.sort().collect)
         }
     }
 }
