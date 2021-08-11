@@ -1,3 +1,5 @@
+package com.example.transforms
+
 import org.apache.spark.sql.{DataFrame}
 
 object DropInvalidRows {

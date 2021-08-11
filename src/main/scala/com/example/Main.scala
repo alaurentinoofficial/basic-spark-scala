@@ -1,7 +1,10 @@
+package com.example
+
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{Row, DataFrame}
 import org.apache.spark.sql.types._
+import com.example.transforms.{Transformer}
 
 object Main extends App {
     val spark = SparkSession
@@ -27,35 +30,10 @@ object Main extends App {
     vote_df.show()
     
     // Explain the average transformation
-    Transformer(vote_df)
+    Transformer()(vote_df)
         .explain()
     
     // Show the average transformation
-    Transformer(vote_df)
+    Transformer()(vote_df)
         .show()
-
-    val schema = StructType(Array(
-        StructField("Named", StringType, true),
-        StructField("Age", DoubleType, true),
-        StructField("Voted", BooleanType, true)
-    ))
-
-    val data = Seq(
-        Row("A", 20.0, true),
-        Row("B", 34.0, false),
-        Row("Z", null, null),
-        Row("C", 17.0, true),
-        Row(null, 68.0, null),
-        Row("D", 67.0, false),
-        Row(null, null, null)
-    )
-
-    val vote2_df = spark.createDataFrame(
-        spark.sparkContext.parallelize(data),
-        schema
-    )
-
-    val exec_df = vote2_df.transform(DropInvalidRows())
-
-    exec_df.show()
 }

@@ -1,7 +1,10 @@
+package com.example.transforms
+
 import org.apache.spark.sql.types.{BooleanType, DoubleType, StringType, StructType, StructField}
 import org.apache.spark.sql.functions.{lit}
 import org.apache.spark.sql.{Row}
-
+import com.example.{SparkSpec}
+import com.example.transforms.{Gr}
 
 class GroupKeyAvgNumberSpec extends SparkSpec {
 
