@@ -1,17 +1,22 @@
-import org.apache.spark.sql.types.{BooleanType, DoubleType, StructType, StructField}
+import org.apache.spark.sql.types.{BooleanType, DoubleType, StringType, StructType, StructField}
+import org.apache.spark.sql.functions.{lit}
+import org.apache.spark.sql.{Row}
 
-class SampleSparkTest extends SparkTest {
+
+class GroupKeyAvgNumberSpec extends SparkSpec {
 
     import spark.implicits._
 
-    feature("Integration test") {
-        scenario("should test group by voted and avg mean") {
+    feature("GroupKeyAvgNumber") {
+        scenario("should return the dataframe grouped by key and aggregated using mean") {
             val vote_df = Seq(
                 ("A", 20, true),
                 ("B", 34, false),
                 ("C", 17, true),
                 ("D", 67, false)
             ).toDF("Name", "Age", "Voted")
+
+            val voted_df = vote_df.transform(GroupKeyAvgNumber("Voted", "Age"))
 
             val check_df = Seq(
                 (true, 18.5),
@@ -23,8 +28,8 @@ class SampleSparkTest extends SparkTest {
                 StructField("Age-Avg", DoubleType, true)
             ))
 
-            Helper.transform(vote_df).schema should be(check_schema)
-            Helper.transform(vote_df).sort().collect should be(check_df.sort().collect)
+            assert(voted_df.schema === check_schema)
+            assert(voted_df.sort().collect === check_df.sort().collect)
         }
     }
 }
